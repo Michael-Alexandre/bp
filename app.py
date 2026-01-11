@@ -4,7 +4,7 @@ import plotly.express as px
 
 
 # ==================================================
-# CONFIGURAÇÃO DA PÁGINA
+# page config
 # ==================================================
 st.set_page_config(
     page_title="Dog BP Dashboard",
@@ -14,7 +14,7 @@ st.set_page_config(
 
 
 # ==================================================
-# ESTILO CORPORATIVO (CSS)
+# corp style (CSS)
 # ==================================================
 st.markdown("""
 <style>
@@ -32,14 +32,14 @@ h1, h2, h3 {
 
 
 # ==================================================
-# TÍTULO
+# TiTle
 # ==================================================
 st.title("Dog BP Dashboard")
 st.caption("Analise dos dados de pressão arterial e frequência cardíaca do Max")
 
 
 # ==================================================
-# FUNÇÃO DE CARGA DE DADOS
+# load data
 # ==================================================
 @st.cache_data
 def load_data(file):
@@ -57,7 +57,7 @@ def load_data(file):
 
 
 # ==================================================
-# SIDEBAR – CONTROLES
+# SIDEBAR – CONTROL
 # ==================================================
 st.sidebar.header("Controls")
 
@@ -92,10 +92,11 @@ df_filtered = df[
     (df["ano"] == ano) &
     (df["mes"] == mes)
 ]
+df_filtered = df_filtered.dropna( subset=["sistolica", "diastolica", "bpm"] )
 
 
 # ==================================================
-# KPIs – VISÃO EXECUTIVA
+# KPIs – corp
 # ==================================================
 st.subheader("Executive Summary")
 
@@ -162,4 +163,5 @@ st.dataframe(
         .sort_values("data_hora")
         .reset_index(drop=True),
     use_container_width=True
+
 )
