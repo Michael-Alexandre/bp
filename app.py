@@ -131,12 +131,7 @@ st.divider()
 st.subheader("Monthly Trend Analysis")
 
 fig = px.scatter(
-    df_filtered.melt(
-        id_vars="data_hora",
-        value_vars=["sitolica", "diastolica", "bpm"],
-        var_name="Indicator",
-        value_name="Measurement"
-    ),
+    df_filtered,
     x="data_hora",
     y=["sistolica", "diastolica", "bpm"],
     labels={
@@ -171,4 +166,5 @@ st.dataframe(
     use_container_width=True
 
 )
+
 
