@@ -93,7 +93,7 @@ df_filtered = df[
     (df["mes"] == mes)
 ]
 df_filtered = df_filtered.dropna( subset=["sistolica", "diastolica", "bpm"] )
-
+df_filtered = df_filtered["data_hora"].dt.strftime("%d/%m %H:%M")
 
 # ==================================================
 # KPIs – corp
@@ -166,5 +166,6 @@ st.dataframe(
     use_container_width=True
 
 )
+
 
 
