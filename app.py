@@ -93,7 +93,7 @@ df_filtered = df[
     (df["mes"] == mes)
 ]
 df_filtered = df_filtered.dropna( subset=["sistolica", "diastolica", "bpm"] )
-df_filtered = df_filtered["data_hora"].dt.strftime("%d/%m %H:%M")
+df_filtered["dt_diames"] = df_filtered["data_hora"].dt.strftime("%d/%m %H:%M")
 
 # ==================================================
 # KPIs – corp
@@ -132,17 +132,17 @@ st.subheader("Monthly Trend Analysis")
 
 fig = px.scatter(
     df_filtered,
-    x="data_hora",
+    x="dt_diames",
     y=["sistolica", "diastolica", "bpm"],
     labels={
         "value": "Measurement",
-        "data_hora": "Date / Time",
+        "dt_diames": "Date / Time",
         "variable": "Indicator"
     },
 )
 
 fig.update_traces(marker_size=20)
-fig.update_xaxes(type="category")
+fig.update_xaxes(type="category", tickformat="%d/%m %H:%M")
 fig.update_layout(
     hovermode="x unified",
     legend_title_text="Indicators",
@@ -166,6 +166,7 @@ st.dataframe(
     use_container_width=True
 
 )
+
 
 
 
